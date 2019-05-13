@@ -14,7 +14,7 @@ otool_arc=$(otool -I -v "${name}" | grep _objc_release)
 
 strings_full=$(strings "${name}" > "$output_dir"/strings_full.txt)
 strings_5=$(cat "$output_dir"/strings_full.txt | grep -E "\w{5}" > "$output_dir"/strings_5.txt)
-keywords_grep=$(cat "$output_dir"/strings_5.txt | grep -e "admin" -e "administrator" -e "password" -e "pw" -e "user" -e "uname" -e "username" -e "usr" -e "select" -e "insert" -e "delete" -e "alter" -e "modify" -e "hostname" -e "key" -e "ip" -e "db" -e "database" -e "sql" -e "connection_string" > "$output_dir"/strings_keywords.txt)
+keywords_grep=$(cat "$output_dir"/strings_5.txt | grep -E -e "admin" -e "administrator" -e "password" -e "pw" -e "user" -e "uname" -e "username" -e "usr" -e "select" -e "insert" -e "delete" -e "alter" -e "modify" -e "hostname" -e "key" -e "db" -e "database" -e "sql" -e "connection_string" -e "[0-9\.]{3}[0-9]" > "$output_dir"/strings_keywords.txt)
 
 ###EXECUTION###
 echo -e "\n[1] Checking for Address Space Layout Randomization (ASLR) PIE flag...\n"
