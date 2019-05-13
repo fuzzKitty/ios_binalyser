@@ -1,9 +1,9 @@
 #!/bin/bash
 
 name="$(echo $1 | sed 's/\.[^.]*$//')"
-echo "Binary file to analyse: $name"
+echo -e "\nBinary file to analyse: $name\n"
 
-output_dir=/private/var/tmp/"$name"/
+output_dir=/private/var/tmp/"$name"
 mkdir $output_dir
 chmod 777 $output_dir
 
@@ -12,7 +12,8 @@ otool_aslr=$(otool -Vh "${name}")
 otool_ssp=$(otool -I -v "${name}" | grep stack_chk_guard)
 otool_arc=$(otool -I -v "${name}" | grep _objc_release)
 
-strings_full=$(strings "${name}" > /private/var/tmp/"$name"/strings_full.txt)
+strings_full=$(strings "${name}" > "$output_dir"/strings_full.txt)
+strings_5=$(cat "$output_dir"/strings_full.txt | grep -E "\w{5}" > "$output_dir"/strings_5.txt)
 
 ###EXECUTION###
 echo -e "\n[1] Checking for Address Space Layout Randomization (ASLR) PIE flag...\n"
