@@ -33,6 +33,6 @@ echo -e "\n[5] Extracting all strings with more than 5 readable chars to "$outpu
 echo -e "$strings_5\n"
 
 echo -e "\n[6] Looking for keywords, output keywords found to "$output_dir"/strings_keywords.txt...\n"
-echo -e "$keywords_grep\n\n"
+echo -e "$keywords_grep\n"
 
 
